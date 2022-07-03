@@ -11,13 +11,14 @@ public class movement_script : MonoBehaviour
     [SerializeField] float jumpCounterT;
 
     [SerializeField] float dashRecoil;
-    [SerializeField] float dashStr=3;
+    [SerializeField] float dashStr = 3;
 
     double offset = 0;
+    string prefix;
 
     public int dir;
     double moveInput;
-    float jumpCounter=3;
+    float jumpCounter = 3;
 
     bool canDash = true;
     public bool isDashing = false;
@@ -32,7 +33,24 @@ public class movement_script : MonoBehaviour
 
     void Start()
     {
+        getPlayerNum();
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    void getPlayerNum()
+    {
+        if (gameObject.GetComponent<PlayerStats>().playerNum == 1)
+        {
+            prefix = "p1";
+        }
+        else if (gameObject.GetComponent<PlayerStats>().playerNum == 2)
+        {
+            prefix = "p2";
+        }
+        else
+        {
+            Debug.Log("u lpm");
+        }
     }
 
     void Update()
@@ -60,7 +78,7 @@ public class movement_script : MonoBehaviour
             Move(-1);
         }
 
-        if(transform.position.y < -8)
+        if (transform.position.y < -8)
         {
             transform.position = new Vector2(-8, 0.5f);
         }
@@ -68,22 +86,23 @@ public class movement_script : MonoBehaviour
 
     void FixedUpdate()
     {
-        moveInput = Input.GetAxisRaw("Horizontal");
-        if (Input.GetAxisRaw("Dash") > 0 && canDash)
+        moveInput = Input.GetAxisRaw(prefix + "Horizontal");
+        
+        if (Input.GetAxisRaw(prefix+"Dash") > 0 && canDash)
         {
             Dash();
         }
 
-        if (Input.GetButton("Jump") && isGrounded)
+        if (Input.GetButton(prefix + "Jump") && isGrounded)
         {
             Jump();
         }
-        else if (Input.GetButton("Jump") && isJumping)
+        else if (Input.GetButton(prefix + "Jump") && isJumping)
         {
             Jump2();
         }
 
-        if (Input.GetButtonUp("Jump"))
+        if (Input.GetButtonUp(prefix + "Jump"))
         {
             isJumping = false;
         }
@@ -91,7 +110,7 @@ public class movement_script : MonoBehaviour
 
     void Move(int dirx)
     {
-        if (isDashing) {return; }
+        if (isDashing) { return; }
 
         if (dirx > 0 && !facingRight)
         {
@@ -103,11 +122,11 @@ public class movement_script : MonoBehaviour
         }
 
         dir = dirx;
-        rb.velocity = new Vector2(dir*speed, rb.velocity.y);
+        rb.velocity = new Vector2(dir * speed, rb.velocity.y);
     }
     void Dash()
     {
-        rb.velocity = new Vector2(dir * dashStr, rb.velocity.y+1);
+        rb.velocity = new Vector2(dir * dashStr, rb.velocity.y);
         offset = Time.time;
         isDashing = true;
         canDash = false;

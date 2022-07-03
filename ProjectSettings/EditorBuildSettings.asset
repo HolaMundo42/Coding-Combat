@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game/selectPlayer.unity
     guid: d4855fb58c1006942be5d05fb85572e3
+  - enabled: 1
+    path: Assets/Scenes/Game/EndOfGame.unity
+    guid: fb8a1f2e18908294d8ba5b4b85285624
   m_configObjects: {}

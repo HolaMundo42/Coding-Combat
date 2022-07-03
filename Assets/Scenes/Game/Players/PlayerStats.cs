@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] int hp;
+    [SerializeField] int hp = 1;
+    public int playerNum;
 
     void Start()
     {
@@ -15,7 +16,7 @@ public class PlayerStats : MonoBehaviour
     void TakeDamage(int dmg)
     {
         hp -= dmg;
-        if(hp < 0)
+        if(hp <= 0)
         {
             Die();
         }
