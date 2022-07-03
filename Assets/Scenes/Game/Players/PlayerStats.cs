@@ -13,7 +13,7 @@ public class PlayerStats : MonoBehaviour
         
     }
 
-    void TakeDamage(int dmg)
+    public void TakeDamage(int dmg)
     {
         hp -= dmg;
         if(hp <= 0)
@@ -24,6 +24,9 @@ public class PlayerStats : MonoBehaviour
 
     void Die()
     {
+        if (playerNum == 1) { PlayerPrefs.SetInt("Winner", 2); }
+        else{ PlayerPrefs.SetInt("Winner", 1); }
         SceneManager.LoadScene("EndOfGame");
+
     }
 }

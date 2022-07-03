@@ -687,7 +687,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 615720133}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1847307700}
+        m_TargetAssemblyTypeName: change_character, Assembly-CSharp
+        m_MethodName: p1ChangeLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &615720133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1530,7 +1542,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 890875208}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1847307700}
+        m_TargetAssemblyTypeName: change_character, Assembly-CSharp
+        m_MethodName: p2ChangeLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &890875208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2074,7 +2098,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1601419158}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1847307700}
+        m_TargetAssemblyTypeName: change_character, Assembly-CSharp
+        m_MethodName: p1ChangeRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1601419158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2245,7 +2281,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1880820973}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1847307700}
+        m_TargetAssemblyTypeName: change_character, Assembly-CSharp
+        m_MethodName: p2ChangeRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1880820973
 MonoBehaviour:
   m_ObjectHideFlags: 0

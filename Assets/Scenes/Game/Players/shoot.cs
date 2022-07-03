@@ -47,7 +47,8 @@ public class shoot : MonoBehaviour
             canShoot = false;
             offset = Time.time;
             blt = Instantiate(bullet, BulletSpawnPoint.position, BulletSpawnPoint.rotation);
-            blt.SetActive(true); 
+            blt.SetActive(true);
+            blt.GetComponent<boooooom>().plyNum = GetComponent<PlayerStats>().playerNum;
             rb = blt.GetComponent<Rigidbody2D>();
             rb.velocity =  transform.right*bulletSpeed+transform.up*1.2f;
         }

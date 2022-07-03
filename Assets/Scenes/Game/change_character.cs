@@ -16,44 +16,61 @@ public class change_character : MonoBehaviour
     {
         PlayerPrefs.SetInt("p1", 0);
         PlayerPrefs.SetInt("p2", 0);
+        p1.color = Characters[index].color;
+        p2.color = Characters[index2].color;
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.D))
         {
-            if (index == maxPlayers-1) { return; }
-            index++;
-            PlayerPrefs.SetInt("p1", index);
-            p1.color = Characters[index].color;
+            p1ChangeRight();
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
-            if (index == 0) { return; }
-            index--;
-            PlayerPrefs.SetInt("p1", index);
-            p1.color = Characters[index].color;
+            p1ChangeLeft();
         }
 
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (index2 == maxPlayers-1) { return; }
-            index2++;
-            PlayerPrefs.SetInt("p2", index2);
-            p2.color = Characters[index2].color;
+            p2ChangeRight();
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (index2 == 0) { return; }
-            index2--;
-            PlayerPrefs.SetInt("p2", index2);
-            p2.color = Characters[index2].color;
+            p2ChangeLeft();
         }
     }
 
-    void changeCharacter(bool next)
+    public void p1ChangeRight()
     {
+        if (index == maxPlayers - 1) { return; }
+        index++;
+        PlayerPrefs.SetInt("p1", index);
+        p1.color = Characters[index].color;
+    }
 
+    public void p1ChangeLeft()
+    {
+        if (index == 0) { return; }
+        index--;
+        PlayerPrefs.SetInt("p1", index);
+        p1.color = Characters[index].color;
+    }
+
+    public void p2ChangeRight()
+    {
+        if (index2 == maxPlayers - 1) { return; }
+        index2++;
+        PlayerPrefs.SetInt("p2", index2);
+        p2.color = Characters[index2].color;
+    }
+
+    public void p2ChangeLeft()
+    {
+        if (index2 == 0) { return; }
+        index2--;
+        PlayerPrefs.SetInt("p2", index2);
+        p2.color = Characters[index2].color;
     }
 }

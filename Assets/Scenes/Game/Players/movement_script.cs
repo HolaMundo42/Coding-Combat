@@ -13,10 +13,14 @@ public class movement_script : MonoBehaviour
     [SerializeField] float dashRecoil;
     [SerializeField] float dashStr = 3;
 
+    [SerializeField] Transform spawnPoint1;
+    [SerializeField] Transform spawnPoint2;
+
     double offset = 0;
     string prefix;
 
     public int dir;
+    int num = 0;
     double moveInput;
     float jumpCounter = 3;
 
@@ -68,19 +72,26 @@ public class movement_script : MonoBehaviour
             isDashing = false;
         }
 
-        if (moveInput > 0)
+        if (moveInput > 0 && !isDashing)
         {
             Move(1);
         }
 
-        else if (moveInput < 0)
+        else if (moveInput < 0 && !isDashing)
         {
             Move(-1);
         }
 
         if (transform.position.y < -8)
         {
-            transform.position = new Vector2(-8, 0.5f);
+            if (GetComponent<PlayerStats>().playerNum == 1)
+            {
+                transform.position = spawnPoint1.position;
+            }
+            else if (GetComponent<PlayerStats>().playerNum == 2)
+            {
+                transform.position = spawnPoint2.position;
+            }
         }
     }
 
@@ -110,8 +121,6 @@ public class movement_script : MonoBehaviour
 
     void Move(int dirx)
     {
-        if (isDashing) { return; }
-
         if (dirx > 0 && !facingRight)
         {
             Flip();
@@ -126,6 +135,7 @@ public class movement_script : MonoBehaviour
     }
     void Dash()
     {
+        isJumping = false;
         rb.velocity = new Vector2(dir * dashStr, rb.velocity.y);
         offset = Time.time;
         isDashing = true;
@@ -158,5 +168,25 @@ public class movement_script : MonoBehaviour
         facingRight = !facingRight;
 
         transform.Rotate(0f, 180f, 0f);
+    }
+
+    private void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (GetComponent<PlayerStats>().playerNum == 1)
+        {
+            try { num = coll.gameObject.GetComponent<PlayerStats>().playerNum; } catch { return; }
+            if(num == 2)
+            { 
+                rb.AddForce(-transform.forward * 3);
+            }
+        }
+        else if (GetComponent<PlayerStats>().playerNum == 2)
+        {
+            try { num = coll.gameObject.GetComponent<PlayerStats>().playerNum; } catch { return; }
+            if(num == 3)
+            { 
+                rb.AddForce(-transform.forward * 3);
+            }
+        }
     }
 }
