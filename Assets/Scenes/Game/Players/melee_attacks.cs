@@ -6,7 +6,6 @@ public class melee_attacks : MonoBehaviour
 {
     [SerializeField] GameObject[] Attacks;
 
-    float[] offsets = {0,0,0};
     float[] lifeTimes = {0,0,0};
     bool[] canDoIt = {true,true,true};
 
@@ -36,12 +35,7 @@ public class melee_attacks : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetButtonDown(prefix + "Fire2") && canDoIt[0])
-        {
-            HitboxAttackThing(0);
-        }
-
-        else if (Input.GetButtonDown(prefix + "Fire2") && GetComponent<movement_script>().isDashing && canDoIt[1])
+        if (Input.GetButtonDown(prefix + "Fire2") && GetComponent<movement_script>().isDashing && canDoIt[1])
         {
             HitboxAttackThing(1);
         }
@@ -50,26 +44,33 @@ public class melee_attacks : MonoBehaviour
         {
             HitboxAttackThing(2);
         }
+
+        else if (Input.GetButtonDown(prefix + "Fire2") && canDoIt[0])
+        {
+            HitboxAttackThing(0);
+        }
     }
 
     void HitboxAttackThing(int idx)
     {
         Attacks[idx].SetActive(true);
-        offsets[idx] = Time.time;
         canDoIt[idx] = false;
+        Attacks[idx].GetComponent<hitbox_attacks>().plyNum = GetComponent<PlayerStats>().playerNum;
         lifeTimes[idx] = Attacks[idx].GetComponent<hitbox_attacks>().lifeTime;
-        Debug.Log(lifeTimes);
     }
 
     void FixedUpdate()
     {
-        for(int i = 0; i < Attacks.Length; ++i)
+        for (int i = 0; i <= 2; ++i)
+        if (lifeTimes[i] >= 0)
         {
-            if(Time.time-offsets[i] > lifeTimes[i])
-            {
-                canDoIt[i] = true;
-                Debug.Log("god");
-            }
+            lifeTimes[i] -= Time.deltaTime;
+        }
+        else
+        {
+            canDoIt[i] = true;
         }
     }
+
+
 }
