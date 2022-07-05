@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2508559253218092631}
   - component: {fileID: 2508559253218092625}
   - component: {fileID: 2508559253218092624}
+  - component: {fileID: -6570211840049953481}
   m_Layer: 0
   m_Name: Csharp
   m_TagString: Untagged
@@ -83,8 +84,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.3556426, g: 0.3884125, b: 0.6792453, a: 1}
+  m_Sprite: {fileID: -1817254126, guid: 79a813cfbe78af4409c2c3353e09aa52, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -111,7 +112,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 6.03, y: 1.66}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -153,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23eb904c7c4736f4c8c9dd4c3dc39e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   speed: 3
   jumpStr: 6
   jumpCounterT: 0.4
@@ -185,7 +187,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 6.03, y: 1.66}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -240,6 +242,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 150
   playerNum: 0
+  animator: {fileID: 0}
+--- !u!95 &-6570211840049953481
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2508559253218092632}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0e135d670d4d5f140ba86d924c6add05, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2508559253399812393
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,6 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 0.2
   dmg: 10
+  plyNum: 0
 --- !u!1 &4434006426573783141 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8068793618452270061, guid: 187ffd437128d214a84b714000797113, type: 3}
@@ -462,6 +486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 0.3
   dmg: 15
+  plyNum: 0
 --- !u!1 &7842282868267501103 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4514787047005015463, guid: 187ffd437128d214a84b714000797113, type: 3}
@@ -481,3 +506,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 0.4
   dmg: 30
+  plyNum: 0

@@ -7,6 +7,7 @@ public class PlayerStats : MonoBehaviour
 {
     [SerializeField] int hp = 1;
     public int playerNum;
+    public Animator animator;
 
     void Start()
     {
@@ -19,6 +20,10 @@ public class PlayerStats : MonoBehaviour
         if(hp <= 0)
         {
             Die();
+        }
+        else
+        {
+            animator.SetTrigger("hurt");
         }
     }
 

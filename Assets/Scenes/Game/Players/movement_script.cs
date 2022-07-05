@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class movement_script : MonoBehaviour
 {
+    public Animator animator; 
+
     Rigidbody2D rb;
     [SerializeField] float speed;
 
@@ -37,6 +39,7 @@ public class movement_script : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         getPlayerNum();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -59,8 +62,15 @@ public class movement_script : MonoBehaviour
 
     void Update()
     {
-
-
+        animator.SetFloat("Speed", speed);
+        if(speed <0.5 && speed > -0.5)
+        {
+            animator.SetBool("Idle", true); 
+        }
+        else
+        {
+            animator.SetBool("Idle", false);
+        }
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
 
         if (Time.time - offset > dashRecoil)
@@ -145,6 +155,7 @@ public class movement_script : MonoBehaviour
     void Jump()
     {
         if (isDashing) { return; }
+        animator.SetTrigger("IsJumping");
         rb.velocity = Vector2.up * jumpStr;
         jumpCounter = jumpCounterT;
         isJumping = true;
