@@ -40,6 +40,8 @@ public class movement_script : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        animator.SetBool("isJumping", false);
+        animator.SetTrigger("Idle");
         getPlayerNum();
         rb = GetComponent<Rigidbody2D>();
     }

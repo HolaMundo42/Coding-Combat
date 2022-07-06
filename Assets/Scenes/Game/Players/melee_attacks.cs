@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class melee_attacks : MonoBehaviour
 {
-    [SerializeField] GameObject[] Attacks;
+    public Animator animator;
 
-    float[] lifeTimes = {0,0,0};
-    bool[] canDoIt = {true,true,true};
+    [SerializeField] Transform dashslashPos;
+    [SerializeField] Transform swingdingPos;
+    [SerializeField] Transform uphitPos;
 
+    [SerializeField] float dashslashWidth;
+    [SerializeField] float dashslashHeight;
+    [SerializeField] float swingdingWidth;
+    [SerializeField] float uphitWidth;
+
+    [SerializeField]  int Ddmg;
+    [SerializeField]  int Udmg;
+    [SerializeField]  int Sdmg;
+
+    float timeBtwAtk;
+    [SerializeField] float startTimeBtwAtk;
+
+    [SerializeField] LayerMask OpLayer;
     string prefix;
+
+    Collider2D[] Enemies;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         getPlayerNum();
     }
 
@@ -34,43 +51,64 @@ public class melee_attacks : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetButtonDown(prefix + "Fire2") && GetComponent<movement_script>().isDashing && canDoIt[1])
+        if (timeBtwAtk <= 0)
         {
-            HitboxAttackThing(1);
-        }
+            if (Input.GetButtonDown(prefix + "Fire2") && GetComponent<movement_script>().isDashing)
+            {
+                HitboxAttackThing(1);
+                animator.SetTrigger("isDashlash");
+            }
 
-        else if (Input.GetButtonDown(prefix + "Fire2") && GetComponent<movement_script>().isJumping && canDoIt[2])
-        {
-            HitboxAttackThing(2);
-        }
+            else if (Input.GetButtonDown(prefix + "Fire2") && GetComponent<movement_script>().isJumping)
+            {
+                HitboxAttackThing(2);
+            }
 
-        else if (Input.GetButtonDown(prefix + "Fire2") && canDoIt[0])
+            else if (Input.GetButtonDown(prefix + "Fire2"))
+            {
+                HitboxAttackThing(0);
+            }
+
+            timeBtwAtk = startTimeBtwAtk;
+        } 
+        else
         {
-            HitboxAttackThing(0);
+            timeBtwAtk -= Time.deltaTime;
         }
     }
 
     void HitboxAttackThing(int idx)
     {
-        Attacks[idx].SetActive(true);
-        canDoIt[idx] = false;
-        Attacks[idx].GetComponent<hitbox_attacks>().plyNum = GetComponent<PlayerStats>().playerNum;
-        lifeTimes[idx] = Attacks[idx].GetComponent<hitbox_attacks>().lifeTime;
+        switch (idx)
+        {
+            case 1:
+                Enemies = Physics2D.OverlapBoxAll(dashslashPos.position, new Vector2(dashslashWidth, dashslashHeight), OpLayer);
+                recieveDMG(Ddmg, Enemies);
+                break;
+            case 2:
+                Enemies = Physics2D.OverlapCircleAll(uphitPos.position, uphitWidth, OpLayer);
+                recieveDMG(Udmg, Enemies);
+                break;
+            case 3:
+                Enemies = Physics2D.OverlapCircleAll(swingdingPos.position, swingdingWidth, OpLayer);
+                recieveDMG(Sdmg, Enemies);
+                break;
+        }
     }
 
-    void FixedUpdate()
+    void recieveDMG(int dmg, Collider2D[] Enemiess)
     {
-        for (int i = 0; i <= 2; ++i)
-        if (lifeTimes[i] >= 0)
+        foreach(Collider2D Enemy in Enemiess)
         {
-            lifeTimes[i] -= Time.deltaTime;
-        }
-        else
-        {
-            canDoIt[i] = true;
+            Enemy.GetComponent<PlayerStats>().TakeDamage(dmg);
         }
     }
 
 
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireCube(dashslashPos.position, new Vector2(dashslashWidth, dashslashHeight));
+        Gizmos.DrawWireSphere(uphitPos.position, uphitWidth);
+        Gizmos.DrawWireSphere(swingdingPos.position, swingdingWidth);
+    }
 }

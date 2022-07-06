@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     public void TakeDamage(int dmg)
