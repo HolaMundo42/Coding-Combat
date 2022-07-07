@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class movement_script : MonoBehaviour
 {
-    public Animator animator; 
+    public Animator animator;
 
     Rigidbody2D rb;
     [SerializeField] float speed;
@@ -32,7 +32,7 @@ public class movement_script : MonoBehaviour
     public bool isJumping = false;
     bool facingRight = true;
 
-    [SerializeField] Transform feetPos;
+    [SerializeField] Transform[] feetPos;
     [SerializeField] float checkRadius;
     [SerializeField] LayerMask whatIsGround;
 
@@ -58,23 +58,25 @@ public class movement_script : MonoBehaviour
         }
         else
         {
-            Debug.Log("u lpm");
+            Debug.Log("u lpm: " + gameObject.GetComponent<PlayerStats>().playerNum);
         }
     }
 
     void Update()
     {
         animator.SetFloat("Speed", speed);
-        if(speed <0.5 && speed > -0.5)
+        if (speed < 0.5 && speed > -0.5)
         {
-            animator.SetBool("Idle", true); 
+            animator.SetBool("Idle", true);
         }
         else
         {
             animator.SetBool("Idle", false);
         }
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
-
+        foreach (Transform feets in feetPos)
+        {
+            isGrounded = Physics2D.OverlapCircle(feets.position, checkRadius, whatIsGround);
+        }
         if (Time.time - offset > dashRecoil)
         {
             canDash = true;
@@ -104,14 +106,15 @@ public class movement_script : MonoBehaviour
             {
                 transform.position = spawnPoint2.position;
             }
+            gameObject.GetComponent<PlayerStats>().TakeDamage(5); ;
         }
     }
 
     void FixedUpdate()
     {
         moveInput = Input.GetAxisRaw(prefix + "Horizontal");
-        
-        if (Input.GetAxisRaw(prefix+"Dash") > 0 && canDash)
+
+        if (Input.GetAxisRaw(prefix + "Dash") > 0 && canDash)
         {
             Dash();
         }
@@ -188,18 +191,26 @@ public class movement_script : MonoBehaviour
         if (GetComponent<PlayerStats>().playerNum == 1)
         {
             try { num = coll.gameObject.GetComponent<PlayerStats>().playerNum; } catch { return; }
-            if(num == 2)
-            { 
+            if (num == 2)
+            {
                 rb.AddForce(-transform.forward * 3);
             }
         }
         else if (GetComponent<PlayerStats>().playerNum == 2)
         {
             try { num = coll.gameObject.GetComponent<PlayerStats>().playerNum; } catch { return; }
-            if(num == 3)
-            { 
+            if (num == 3)
+            {
                 rb.AddForce(-transform.forward * 3);
             }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        foreach (Transform feets in feetPos)
+        {
+            Gizmos.DrawWireSphere(feets.position, checkRadius);
         }
     }
 }

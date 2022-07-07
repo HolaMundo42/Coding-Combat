@@ -20,7 +20,6 @@ public class Spawn_Players : MonoBehaviour
         p2 = Instantiate(Players[PlayerPrefs.GetInt("p2")], spawnPoint2.position, Quaternion.identity);
         p2.layer = LayerMask.NameToLayer("Player2");
         p2.GetComponent<PlayerStats>().playerNum = 2;
-
     }
 
     void Update()

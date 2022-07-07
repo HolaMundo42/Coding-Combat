@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField] int hp = 1;
-    public int playerNum;
+    public int playerNum=-69;
     public Animator animator;
 
     void Start()

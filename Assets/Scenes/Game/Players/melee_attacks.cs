@@ -7,20 +7,25 @@ public class melee_attacks : MonoBehaviour
     public Animator animator;
 
     [SerializeField] Transform dashslashPos;
-    [SerializeField] Transform swingdingPos;
-    [SerializeField] Transform uphitPos;
-
     [SerializeField] float dashslashWidth;
     [SerializeField] float dashslashHeight;
-    [SerializeField] float swingdingWidth;
-    [SerializeField] float uphitWidth;
+    [SerializeField] int Ddmg;
+    [SerializeField] float Drecoil;
 
-    [SerializeField]  int Ddmg;
+
+    [SerializeField] Transform swingdingPos;
+    [SerializeField] float swingdingWidth;
+    [SerializeField] int Sdmg;
+    [SerializeField] float Srecoil;
+
+
+    [SerializeField] Transform uphitPos;
+    [SerializeField] float uphitWidth;
     [SerializeField]  int Udmg;
-    [SerializeField]  int Sdmg;
+    [SerializeField] float Urecoil;
+
 
     float timeBtwAtk;
-    [SerializeField] float startTimeBtwAtk;
 
     [SerializeField] LayerMask OpLayer;
     string prefix;
@@ -38,10 +43,12 @@ public class melee_attacks : MonoBehaviour
         if (gameObject.GetComponent<PlayerStats>().playerNum == 1)
         {
             prefix = "p1";
+            OpLayer = LayerMask.GetMask("Player2");
         }
         else if (gameObject.GetComponent<PlayerStats>().playerNum == 2)
         {
             prefix = "p2";
+            OpLayer = LayerMask.GetMask("Player1");
         }
         else
         {
@@ -57,19 +64,24 @@ public class melee_attacks : MonoBehaviour
             {
                 HitboxAttackThing(1);
                 animator.SetTrigger("isDashlash");
+                timeBtwAtk = Drecoil;
+                Debug.Log("dashlash");
             }
 
             else if (Input.GetButtonDown(prefix + "Fire2") && GetComponent<movement_script>().isJumping)
             {
                 HitboxAttackThing(2);
+                timeBtwAtk = Urecoil;
+                Debug.Log("uphit");
             }
 
             else if (Input.GetButtonDown(prefix + "Fire2"))
             {
                 HitboxAttackThing(0);
+                timeBtwAtk = Srecoil;
+                Debug.Log("swingding");
             }
 
-            timeBtwAtk = startTimeBtwAtk;
         } 
         else
         {
@@ -89,7 +101,7 @@ public class melee_attacks : MonoBehaviour
                 Enemies = Physics2D.OverlapCircleAll(uphitPos.position, uphitWidth, OpLayer);
                 recieveDMG(Udmg, Enemies);
                 break;
-            case 3:
+            case 0:
                 Enemies = Physics2D.OverlapCircleAll(swingdingPos.position, swingdingWidth, OpLayer);
                 recieveDMG(Sdmg, Enemies);
                 break;
