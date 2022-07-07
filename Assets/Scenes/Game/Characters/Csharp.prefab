@@ -69,6 +69,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2508559254860428548}
+  - {fileID: 4087679092395615424}
   - {fileID: 2508559253399812394}
   - {fileID: 180134282507668116}
   m_Father: {fileID: 0}
@@ -197,8 +198,9 @@ MonoBehaviour:
   isDashing: 0
   isJumping: 0
   feetPos:
-  - {fileID: 0}
-  checkRadius: 2.45
+  - {fileID: 2508559254860428548}
+  - {fileID: 4087679092395615424}
+  checkRadius: 0.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -261,15 +263,19 @@ MonoBehaviour:
   dashslashWidth: 3.5
   dashslashHeight: 0.5
   Ddmg: 5
-  Drecoil: 2
+  Drecoil: 1.75
   swingdingPos: {fileID: 3642120368031028743}
   swingdingWidth: 1
   Sdmg: 15
-  Srecoil: 4
+  Srecoil: 1.5
   uphitPos: {fileID: 7474167740476860866}
   uphitWidth: 1.2
   Udmg: 25
   Urecoil: 1
+  ultiPos: {fileID: 1052898201471680415}
+  ultiWidth: 2
+  Ultidmg: 65
+  Ultirecoil: 1
   OpLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -285,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1556b7371d8093346a4a96fd27e3e4cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 150
+  hp: 400
   playerNum: 0
   animator: {fileID: 0}
 --- !u!95 &-6570211840049953481
@@ -337,7 +343,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2508559253218092628}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2508559254860428555
 GameObject:
@@ -363,7 +369,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2508559254860428555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.94, y: -0.52, z: 0}
+  m_LocalPosition: {x: -1.63, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -400,6 +406,68 @@ Transform:
   m_Children: []
   m_Father: {fileID: 180134282507668116}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7817347025705715928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4087679092395615424}
+  m_Layer: 0
+  m_Name: feetPos (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4087679092395615424
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7817347025705715928}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.06, y: -0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2508559253218092628}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8198818768416980749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1052898201471680415}
+  m_Layer: 0
+  m_Name: ultiPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1052898201471680415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8198818768416980749}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.43, y: 0.88, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 180134282507668116}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8308017137925924525
 GameObject:
@@ -457,7 +525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5768314513649484060, guid: 187ffd437128d214a84b714000797113, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5768314513649484060, guid: 187ffd437128d214a84b714000797113, type: 3}
       propertyPath: m_LocalPosition.x

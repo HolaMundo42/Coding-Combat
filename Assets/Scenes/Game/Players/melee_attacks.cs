@@ -24,6 +24,12 @@ public class melee_attacks : MonoBehaviour
     [SerializeField]  int Udmg;
     [SerializeField] float Urecoil;
 
+    [SerializeField] Transform ultiPos;
+    [SerializeField] float ultiWidth;
+    [SerializeField] int Ultidmg;
+    [SerializeField] float Ultirecoil;
+
+    int mana = 0;
 
     float timeBtwAtk;
 
@@ -82,6 +88,14 @@ public class melee_attacks : MonoBehaviour
                 Debug.Log("swingding");
             }
 
+            else if (Input.GetButtonDown(prefix + "Fire3") && mana > 99)
+            {
+                mana = 0;
+                HitboxAttackThing(3);
+                timeBtwAtk = Ultirecoil;
+                Debug.Log("ulti");
+            }
+
         } 
         else
         {
@@ -101,6 +115,11 @@ public class melee_attacks : MonoBehaviour
                 Enemies = Physics2D.OverlapCircleAll(uphitPos.position, uphitWidth, OpLayer);
                 recieveDMG(Udmg, Enemies);
                 break;
+            case 3:
+                Enemies = Physics2D.OverlapCircleAll(ultiPos.position, ultiWidth, OpLayer);
+                recieveDMG(Ultidmg, Enemies);
+                break;
+
             case 0:
                 Enemies = Physics2D.OverlapCircleAll(swingdingPos.position, swingdingWidth, OpLayer);
                 recieveDMG(Sdmg, Enemies);
@@ -112,6 +131,7 @@ public class melee_attacks : MonoBehaviour
     {
         foreach(Collider2D Enemy in Enemiess)
         {
+            mana += dmg * 3;
             Enemy.GetComponent<PlayerStats>().TakeDamage(dmg);
         }
     }
@@ -122,5 +142,6 @@ public class melee_attacks : MonoBehaviour
         Gizmos.DrawWireCube(dashslashPos.position, new Vector2(dashslashWidth, dashslashHeight));
         Gizmos.DrawWireSphere(uphitPos.position, uphitWidth);
         Gizmos.DrawWireSphere(swingdingPos.position, swingdingWidth);
+        Gizmos.DrawWireSphere(ultiPos.position, ultiWidth);
     }
 }
